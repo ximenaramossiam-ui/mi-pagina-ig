@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Mi presentación — IG Bio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg1: #0f172a;
+      --glass: rgba(255,255,255,0.06);
+      --accent: linear-gradient(90deg,#ff7a18,#af002d 50%,#319197);
+      --card-radius: 18px;
+      --max-w: 980px;
+    }
+    *{box-sizing:border-box}
+    body{font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; margin:0; background: radial-gradient(1200px 600px at 10% 10%, rgba(49,145,151,0.12), transparent), radial-gradient(1000px 500px at 90% 90%, rgba(255,122,24,0.08), transparent), var(--bg1); color:#e6eef8; -webkit-font-smoothing:antialiased}
+    .wrap{max-width:var(--max-w); margin:40px auto; padding:28px; border-radius:22px; background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); box-shadow: 0 10px 30px rgba(2,6,23,0.6);}
+
+    header{display:flex; gap:20px; align-items:center}
+    .avatar{width:120px; height:120px; border-radius:22px; overflow:hidden; flex:0 0 120px; background:linear-gradient(135deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02)); padding:6px;}
+    .avatar img{width:100%; height:100%; object-fit:cover; display:block; border-radius:14px}
+    .meta{flex:1}
+    .name{font-family:Poppins, Inter; font-size:24px; font-weight:800; letter-spacing:0.2px; margin:0}
+    .subtitle{margin:6px 0 12px; opacity:0.9}
+
+    .bio-card{background:var(--glass); padding:18px; border-radius:14px; backdrop-filter: blur(6px);}
+
+    .actions{display:flex; gap:10px; margin-top:10px}
+    .btn{background:transparent; border:1px solid rgba(255,255,255,0.08); padding:9px 12px; border-radius:10px; cursor:pointer; font-weight:600}
+    .btn.accent{background:var(--accent); border:none; color:white; padding:10px 14px; border-radius:12px}
+
+    .gallery{display:grid; grid-template-columns: repeat(4,1fr); gap:10px; margin-top:18px}
+    .gallery img{width:100%; height:100px; object-fit:cover; border-radius:12px; cursor:pointer; transform:scale(1); transition:transform .25s ease, box-shadow .25s ease}
+    .gallery img:hover{transform:translateY(-6px) scale(1.02); box-shadow: 0 8px 24px rgba(0,0,0,0.6)}
+
+    .tip{font-size:13px; opacity:0.8}
+
+    /* Lightbox */
+    .lightbox{position:fixed; inset:0; display:none; align-items:center; justify-content:center; background:rgba(2,6,23,0.72); z-index:1200}
+    .lightbox.open{display:flex}
+    .lightbox img{max-width:92%; max-height:86%; border-radius:12px; box-shadow: 0 20px 60px rgba(0,0,0,0.7)}
+
+    /* small screens */
+    @media (max-width:700px){
+      .gallery{grid-template-columns:repeat(2,1fr)}
+      header{flex-direction:column; align-items:flex-start}
+      .avatar{width:96px; height:96px}
+      .wrap{margin:18px; padding:16px}
+    }
+
+    /* Animated blobs */
+    .blobs{position:absolute; inset:0; pointer-events:none; z-index:0}
+    .blob{position:absolute; filter:blur(54px); opacity:0.14; transform-origin:center}
+    .b1{width:520px; height:520px; background:linear-gradient(45deg,#ff7a18,#af002d); top:-12%; left:-8%;}
+    .b2{width:360px; height:360px; background:linear-gradient(45deg,#1fb0a5,#4cc7ff); right:-6%; bottom:-8%}
+
+    /* tiny credit */
+    footer{margin-top:18px; font-size:13px; opacity:0.75; display:flex; justify-content:space-between; align-items:center}
+  </style>
+</head>
+<body>
+  <div class="blobs" aria-hidden>
+    <div class="blob b1"></div>
+    <div class="blob b2"></div>
+  </div>
+  <main class="wrap" role="main">
+    <header>
+      <div class="avatar">
+        <!-- Sustituye images/avatar.jpg por tu foto principal -->
+        <img src="Foto principal.png"alt="Mi foto" id="bigAvatar">
+      </div>
+      <div class="meta">
+        <h1 class="name" id="name">Ximena Ramos</h1>
+        <div class="subtitle" id="tagline">Café, deportes y viajes 💕</div>
+        <div class="bio-card">
+          <p id="bio">Tu soborname con un chai</p>
+          <div class="actions">
+
+          </div>
+          <p class="tip">Si quieres hablar manda un DM 😘 </p>
+        </div>
+      </div>
+    </header>
+
+    <section>
+      <h3 style="margin-top:20px">Me and my people</h3>
+      <div class="gallery" id="gallery">
+        <!-- Cambia estas rutas por tus fotos. Mantén el tamaño cuadrado preferentemente. -->
+        <img src="Imagen1.png" alt="Foto 1" data-full="images/photo1.jpg">
+        <img src="Imagen2.png" alt="Foto 2" data-full="images/photo2.jpg">
+        <img src="Imagen3.jpeg" alt="Foto 3" data-full="images/photo3.jpg">
+        <img src="Imagen4.jpeg" alt="Foto 4" data-full="images/photo4.jpg">
+      </div>
+    </section>
+
+    <div style="margin-top:20px; display:flex; gap:12px; align-items:center;">
+      <div style="flex:1">
+        <label style="font-size:13px; opacity:0.9">Algo más..</label>
+        <div id="preview" class="bio-card" style="margin-top:6px">Creo que si entendí la puta vibra
+        </div>
+      </div>
+      <div style="width:140px; text-align:center">
+      
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <span>16/08/2025</span>
+      <small>🫶🏼</small>
+    </footer>
+  </main>
+
+  <!-- lightbox -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
+    <img src="" alt="Preview grande" id="lightboxImg">
+  </div>
+
+  <script>
+    // --- Lightbox ---
+    const gallery = document.getElementById('gallery');
+    const lightbox = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lightboxImg');
+    gallery.addEventListener('click', e => {
+      const img = e.target.closest('img');
+      if(!img) return;
+      lbImg.src = img.dataset.full || img.src;
+      lightbox.classList.add('open');
+    });
+    lightbox.addEventListener('click', ()=> lightbox.classList.remove('open'));
+
+    // --- Simple editor in-place ---
+    const editBtn = document.getElementById('editBtn');
+    editBtn.addEventListener('click', ()=>{
+      const name = prompt('Tu nombre (actual: '+document.getElementById('name').textContent+')', document.getElementById('name').textContent);
+      if(name) document.getElementById('name').textContent = name;
+      const tag = prompt('Tagline (ej: Viajero · Fotógrafo)', document.getElementById('tagline').textContent);
+      if(tag) document.getElementById('tagline').textContent = tag;
+      const bio = prompt('Bio corta para IG (1-2 líneas)', document.getElementById('bio').textContent);
+      if(bio) document.getElementById('bio').textContent = bio;
+    });
+
+    // --- Bio generator & copy ---
+    const copyBtn = document.getElementById('copyBtn');
+    const visitBtn = document.getElementById('visitBtn');
+    const preview = document.getElementById('preview');
+
+    function generateBios(){
+      const name = document.getElementById('name').textContent.trim();
+      const tagline = document.getElementById('tagline').textContent.trim();
+      const short = name + ' — ' + tagline + " 📍 | Capturando momentos en movimiento.";
+      const creative = '✦ '+name+' ✦\nCafé, carrete y caminos.\nDisponible para proyectos y colaboraciones.';
+      const playful = name+" | sonrisa constante. DM para fotos y aventuras 👋";
+      return {short, creative, playful};
+    }
+
+    visitBtn.addEventListener('click', ()=>{
+      const b = generateBios();
+      preview.innerHTML = `
+        <strong>Opción corta:</strong><div style=\"margin-top:6px;\">${b.short}</div>
+        <hr style=\"margin:10px 0;border:none;border-top:1px solid rgba(255,255,255,0.04)\">
+        <strong>Opción creativa:</strong><div style=\"margin-top:6px;white-space:pre-line\">${b.creative}</div>
+        <hr style=\"margin:10px 0;border:none;border-top:1px solid rgba(255,255,255,0.04)\">
+        <strong>Opción divertida:</strong><div style=\"margin-top:6px\">${b.playful}</div>
+      `;
+    });
+
+    copyBtn.addEventListener('click', async ()=>{
+      const {short} = generateBios();
+      try{
+        await navigator.clipboard.writeText(short);
+        copyBtn.textContent = 'Copiado ✅';
+        setTimeout(()=> copyBtn.textContent = 'Copiar bio para IG', 1800);
+      }catch(e){
+        alert('No se pudo copiar automáticamente. Selecciona y copia manualmente: '+short);
+      }
+    });
+
+    // Accessibility: close lightbox with Esc
+    document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') lightbox.classList.remove('open'); });
+
+    // Mobile-friendly: tapping avatar allows to change main avatar path (local quick swap)
+    const bigAvatar = document.getElementById('bigAvatar');
+    bigAvatar.addEventListener('click', ()=>{
+      const path = prompt('Ruta local de la nueva foto (ej: images/avatar2.jpg)', bigAvatar.src);
+      if(path) bigAvatar.src = path;
+    });
+
+  </script>
+</body>
+</html>
